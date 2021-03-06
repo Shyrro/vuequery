@@ -1,18 +1,30 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" />
+  <div>Hello Vue 3 + Vite</div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import HelloWorld from './components/HelloWorld.vue'
+import { Query, QueryCache, QueryClient, QueryOptions } from "react-query/core";
+import { defineComponent, Ref, ref } from "vue";
+import { useQueryClient } from "./composables/useQueryClient";
 
 export default defineComponent({
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-})
+  name: "App",
+  setup() {
+    // cache: QueryCache
+    // queryKey: QueryKey
+    // queryHash: string
+    // options?: QueryOptions<TQueryFnData, TError, TData>
+    // defaultOptions?: QueryOptions<TQueryFnData, TError, TData>
+    // state?: QueryState<TData, TError>
+
+    const client = ref(new QueryClient()) as Ref<QueryClient>;
+    const queryClient = useQueryClient(client.value);
+
+    // console.log('Query : ', query);
+    console.log('Client', client);
+    console.log('Query client', queryClient);
+  },
+});
 </script>
 
 <style>
